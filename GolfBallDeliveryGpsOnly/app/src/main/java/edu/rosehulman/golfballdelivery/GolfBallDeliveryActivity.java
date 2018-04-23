@@ -32,7 +32,7 @@ public class GolfBallDeliveryActivity extends Activity {
      */
     public BallColor[] mLocationColors = new BallColor[]{BallColor.NONE, BallColor.NONE, BallColor.NONE};
 
-    /**
+     /**
      * Simple boolean that is updated when the Team button is pressed to switch teams.
      */
     public boolean mOnRedTeam = false;
