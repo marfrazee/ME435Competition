@@ -217,7 +217,7 @@ public class RobotActivity extends AccessoryActivity implements FieldGpsListener
         }
       }
     } else {
-      // Consider reseting the sensor heading using the calculated heading.
+      // Consider resetting the sensor heading using the calculated heading.
       int calculatedGpsTrustThresholdCount = 3;
       if (mMovingStraight && mSavedCalculatedGpsHeadings.size() > calculatedGpsTrustThresholdCount) {
         boolean resetSensorHeadingToCalculatedGpsHeading = true;
