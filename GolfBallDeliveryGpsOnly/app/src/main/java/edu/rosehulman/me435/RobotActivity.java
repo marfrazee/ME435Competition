@@ -274,7 +274,9 @@ public class RobotActivity extends AccessoryActivity implements FieldGpsListener
       }
     }, 0, LOOP_INTERVAL_MS);
     mFieldOrientation.registerListener(this);
-    mFieldGps.requestLocationUpdates(this, 1000, 0);
+
+    //TODO: If you ever want to use the GPS again, uncomment his line and the one in onStop
+//    mFieldGps.requestLocationUpdates(this, 1000, 0);
   }
 
   @Override
@@ -284,7 +286,7 @@ public class RobotActivity extends AccessoryActivity implements FieldGpsListener
     mTimer.cancel();
     mTimer = null;
     mFieldOrientation.unregisterListener();
-    mFieldGps.removeUpdates();
+//    mFieldGps.removeUpdates();
   }
 
   /**
