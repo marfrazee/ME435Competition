@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/color_blob_detection_activity_surface_view"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_margin="10dp"
         android:text="Left/Right Location" />
 
@@ -27,7 +27,7 @@
         android:layout_alignBaseline="@id/left_right_location_label"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="---" />
@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/left_right_location_label"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_margin="10dp"
         android:text="Top/Bottom Location" />
 
@@ -46,7 +46,7 @@
         android:layout_alignBaseline="@id/top_bottom_location_label"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="---" />
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/top_bottom_location_label"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_margin="10dp"
         android:text="Size Percentage" />
 
@@ -65,7 +65,7 @@
         android:layout_alignBaseline="@id/size_percentage_label"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:textSize="32sp"
+        android:textSize="18dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="---" />
