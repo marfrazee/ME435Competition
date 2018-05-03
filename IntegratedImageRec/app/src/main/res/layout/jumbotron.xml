@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:id="@+id/jumbo_linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,7 +13,18 @@
         android:layout_weight="1"
         android:text="GPS X"
         android:textSize="96sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:id="@+id/go_or_stop_button"
+        style="@style/ColorButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/green_button"
+        android:onClick="handleGoOrMissionComplete"
+        android:text="Go!"
+        android:textSize="100sp"/>
     <TextView
         android:id="@+id/jumbo_Y"
         android:layout_width="wrap_content"
@@ -20,6 +32,8 @@
         android:layout_weight="1"
         android:text="GPS Y"
         android:textSize="96sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"/>
+
 
 </LinearLayout>
