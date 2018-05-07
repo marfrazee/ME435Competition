@@ -7,6 +7,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -18,9 +20,12 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.core.Core;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
@@ -33,7 +38,7 @@ import edu.rosehulman.me435.RobotActivity;
  * Created by frazeema on 5/3/2018.
  */
 
-public class ImageRecActivity extends RobotActivity implements CameraBridgeViewBase.CvCameraViewListener2{
+public class ImageRecActivity extends RobotActivity implements CameraBridgeViewBase.CvCameraViewListener2, View.OnTouchListener{
 
     public static final String TAG = "ConeFinder";
     /** Records the latest boolean value for the cone found status.  True mean cone is visible. */
@@ -58,6 +63,7 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
             switch (status) {
                 case LoaderCallbackInterface.SUCCESS:
                     mOpenCvCameraView.enableView();
+                    mOpenCvCameraView.setOnTouchListener(ImageRecActivity.this);
                     break;
                 default:
                     super.onManagerConnected(status);
@@ -86,6 +92,7 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
     private double mCameraViewArea;
 
     protected ViewFlipper mViewFlipper;
+    private Mat mRgba;
 
 
     @Override
@@ -263,6 +270,7 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
     @Override
     public void onCameraViewStarted(int width, int height) {
         mDetector = new ColorBlobDetector();
+        mRgba = new Mat(height, width, CvType.CV_8UC4);
         applyHsvTargetHsvRangeValues();
         // Record the screen size constants
         mCameraViewWidth = (double)width;
@@ -278,11 +286,11 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
-        Mat rgba = inputFrame.rgba();
-        mDetector.process(rgba);
+        mRgba = inputFrame.rgba();
+        mDetector.process(mRgba);
 
         List<MatOfPoint> contours = mDetector.getContours(); // For the outline
-        Imgproc.drawContours(rgba, contours, -1, CONTOUR_COLOR);
+        Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
 
         // Now DONE: Add our stuff.
         // Find the center of the cone.
@@ -295,14 +303,14 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
             // Draw a circle on the screen at the center.
             double coneCenterX = topBottomLocation * mCameraViewWidth;
             double coneCenterY = (leftRightLocation + 1.0) / 2.0 * mCameraViewHeight;
-            Imgproc.circle(rgba, new Point(coneCenterX, coneCenterY), 5, CONTOUR_COLOR, -1);
+            Imgproc.circle(mRgba, new Point(coneCenterX, coneCenterY), 5, CONTOUR_COLOR, -1);
         }
         runOnUiThread(new Runnable() {
             public void run() {
                 onImageRecComplete(coneFound, leftRightLocation, topBottomLocation, sizePercentage);
             }
         });
-        return rgba;
+        return mRgba;
     }
 
     /**
@@ -454,4 +462,56 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
         return m;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (mViewFlipper.getDisplayedChild() != 1) {
+            Log.d(TAG, "Don't listen for touch events if the camera is not visible.");
+            return false;
+        }
+        int cols = mRgba.cols();
+        int rows = mRgba.rows();
+
+        int xOffset = (mOpenCvCameraView.getWidth() - cols) / 2;
+        int yOffset = (mOpenCvCameraView.getHeight() - rows) / 2;
+
+        int x = (int) event.getX() - xOffset;
+        int y = (int) event.getY() - yOffset;
+
+        Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
+
+        if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
+
+        Rect touchedRect = new Rect();
+
+        touchedRect.x = (x > 4) ? x - 4 : 0;
+        touchedRect.y = (y > 4) ? y - 4 : 0;
+
+        touchedRect.width = (x + 4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
+        touchedRect.height = (y + 4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
+
+        Mat touchedRegionRgba = mRgba.submat(touchedRect);
+
+        Mat touchedRegionHsv = new Mat();
+        Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
+
+        // Calculate average color of touched region
+        Scalar touchedHsv = Core.sumElems(touchedRegionHsv);
+        int pointCount = touchedRect.width * touchedRect.height;
+        for (int i = 0; i < touchedHsv.val.length; i++)
+            touchedHsv.val[i] /= pointCount;
+
+        //Toast.makeText(this, "HSV = " + touchedHsv, Toast.LENGTH_LONG).show();
+
+        // Set and save the color selected.  This is where the real work happens
+        mConeTargetH = (int) touchedHsv.val[0];
+        mConeTargetS = (int) touchedHsv.val[1];
+        mConeTargetV = (int) touchedHsv.val[2];
+        updateUiWidgetsFromParameters();
+        applyHsvTargetHsvRangeValues();
+
+        touchedRegionRgba.release();
+        touchedRegionHsv.release();
+
+        return false; // don't need subsequent touch events
+    }
 }
