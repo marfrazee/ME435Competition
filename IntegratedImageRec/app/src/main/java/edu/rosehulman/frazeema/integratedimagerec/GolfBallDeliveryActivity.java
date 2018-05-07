@@ -176,7 +176,7 @@ public class GolfBallDeliveryActivity extends ImageRecActivity {
 
 
         // When you start using the real hardware you don't need test buttons.
-        boolean hideFakeGpsButtons = false;
+        boolean hideFakeGpsButtons = true;
         if (hideFakeGpsButtons) {
             TableLayout fakeGpsButtonTable = (TableLayout) findViewById(R.id.fake_gps_button_table);
             fakeGpsButtonTable.setVisibility(View.GONE);
@@ -271,6 +271,15 @@ public class GolfBallDeliveryActivity extends ImageRecActivity {
         mJumboXTextView.setText("" + (int) mGuessX);
         mJumboYTextView.setText("" + (int) mGuessY);
 
+        // To help you debug change the backgound color of the jumbotron
+        if(mConeFound) {
+            mJumbotronLinearLayout.setBackgroundColor(Color.parseColor("#ff8000"));
+        } else if(mCurrentGpsHeading != NO_HEADING) {
+            mJumbotronLinearLayout.setBackgroundColor(Color.GREEN);
+        } else {
+            mJumbotronLinearLayout.setBackgroundColor(Color.LTGRAY);
+        }
+
 
         long timeRemainingSeconds = MATCH_LENGTH_MS / 1000;
         if(mState != State.READY_FOR_MISSION) {
@@ -337,12 +346,6 @@ public class GolfBallDeliveryActivity extends ImageRecActivity {
             gpsInfo += " " + getString(R.string.degrees_format, mCurrentGpsHeading);
         } else {
             gpsInfo += " ?°";
-        }
-        // TODO: once image rec is done, move this area to the loop function
-        if(mCurrentGpsHeading != NO_HEADING) {
-            mJumbotronLinearLayout.setBackgroundColor(Color.GREEN);
-        } else {
-            mJumbotronLinearLayout.setBackgroundColor(Color.LTGRAY);
         }
 
         gpsInfo += "  " + mGpsCounter;
