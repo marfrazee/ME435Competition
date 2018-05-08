@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "343864944300",
+    "firebase_url": "https://integratedimagerec-bdfb4.firebaseio.com",
+    "project_id": "integratedimagerec-bdfb4",
+    "storage_bucket": "integratedimagerec-bdfb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343864944300:android:0cee2cabe17a9f7a",
+        "android_client_info": {
+          "package_name": "edu.rosehulman.frazeema.integratedimagerec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "343864944300-slj8sn0kd5v521sue4re1j9gqjd1t0tc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.rosehulman.frazeema.integratedimagerec",
+            "certificate_hash": "e7b1671d68e45a62e00f41255451f656f10db3c3"
+          }
+        },
+        {
+          "client_id": "343864944300-brdprca2tcdpejf4164qpq2taa2o2gpl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2kJr7Glfcyqz6YhlGE78ApjBKjtNQCFc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "343864944300-brdprca2tcdpejf4164qpq2taa2o2gpl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
