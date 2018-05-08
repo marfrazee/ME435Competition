@@ -1,9 +1,11 @@
 package edu.rosehulman.frazeema.integratedimagerec;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -467,6 +469,7 @@ public class GolfBallDeliveryActivity extends ImageRecActivity {
     /**
      * Clicks to the red arrow image button that should show a dialog window.
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void handleDrivingStraight(View view) {
         Toast.makeText(this, "handleDrivingStraight", Toast.LENGTH_SHORT).show();
         AlertDialog.Builder builder = new AlertDialog.Builder(GolfBallDeliveryActivity.this);

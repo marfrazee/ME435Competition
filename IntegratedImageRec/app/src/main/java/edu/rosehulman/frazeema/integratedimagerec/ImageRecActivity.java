@@ -1,7 +1,9 @@
 package edu.rosehulman.frazeema.integratedimagerec;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -95,6 +97,7 @@ public class ImageRecActivity extends RobotActivity implements CameraBridgeViewB
     private Mat mRgba;
 
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
