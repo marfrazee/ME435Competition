@@ -158,70 +158,100 @@
         android:layout_toRightOf="@id/state_label"
         android:text="---" />
 
+
+    <TextView
+        android:id="@+id/substateTime_textview"
+        style="@style/DisplayText"
+        android:layout_alignBaseline="@id/substateTime_label"
+        android:layout_toRightOf="@id/state_label"
+        android:text="---" />
+    <TextView
+        android:id="@+id/substateTime_label"
+        style="@style/DisplayText"
+        android:layout_below="@+id/orientation_label"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Substate Time:" />
+
+    <TextView
+        android:id="@+id/substate_textview"
+        style="@style/DisplayText"
+        android:layout_alignBaseline="@id/substate_label"
+        android:layout_toRightOf="@id/state_label"
+        android:text="---" />
+    <TextView
+        android:id="@+id/substate_label"
+        style="@style/DisplayText"
+        android:layout_below="@+id/substateTime_label"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Substate:" />
+
+
     <TableLayout
         android:id="@+id/fake_gps_button_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/orientation_label"
+        android:layout_below="@id/substate_label"
         android:layout_marginTop="10dp">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsF0"
-                android:text="GPS F0" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsF0"-->
+                <!--android:text="GPS F0" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsF1"
-                android:text="GPS F1" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsF1"-->
+                <!--android:text="GPS F1" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsF2"
-                android:text="GPS F2" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsF2"-->
+                <!--android:text="GPS F2" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsF3"
-                android:text="GPS F3" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsF3"-->
+                <!--android:text="GPS F3" />-->
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <!--<TableRow-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsH0"
-                android:text="GPS H0" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsH0"-->
+                <!--android:text="GPS H0" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsH1"
-                android:text="GPS H1" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsH1"-->
+                <!--android:text="GPS H1" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsH2"
-                android:text="GPS H2" />
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsH2"-->
+                <!--android:text="GPS H2" />-->
 
-            <Button
-                style="@style/ColorButton.HorzLinearLayout"
-                android:background="@drawable/black_button"
-                android:onClick="handleFakeGpsH3"
-                android:text="GPS H3" />
-        </TableRow>
+            <!--<Button-->
+                <!--style="@style/ColorButton.HorzLinearLayout"-->
+                <!--android:background="@drawable/black_button"-->
+                <!--android:onClick="handleFakeGpsH3"-->
+                <!--android:text="GPS H3" />-->
+        <!--</TableRow>-->
     </TableLayout>
 
     <TableLayout
